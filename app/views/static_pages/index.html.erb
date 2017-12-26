@@ -1,0 +1,70 @@
+<script>
+         window.navigator = window.navigator || {};
+         window.navigator.geolocation = window.navigator.geolocation ||
+                                        undefined;
+
+         if (navigator.geolocation === undefined) {
+            // document.getElementById('g-unsupported').classList.remove('hidden');
+                    alert("Your geolocation is undefined");
+            // });
+         } else {
+            //  alert("I have your geolocation");
+            navigator.geolocation.getCurrentPosition(function(position) {
+                alert("You are currently at latitude " + position.coords.latitude + " and longitude " + position.coords.longitude);
+                // alert(position.coords.longitude);
+              });
+        //     var log = document.getElementById('log');
+        //     var watchId = null;
+        //     var positionOptions = {
+        //       enableHighAccuracy: true,
+        //       timeout: 10 * 1000, // 10 seconds
+        //       maximumAge: 30 * 1000 // 30 seconds
+            };
+ 
+        //     function success(position) {
+        //       document.getElementById('latitude').innerHTML = position.coords.latitude;
+        //       document.getElementById('longitude').innerHTML = position.coords.longitude;
+        //       document.getElementById('position-accuracy').innerHTML = position.coords.accuracy;
+ 
+        //       document.getElementById('altitude').innerHTML = position.coords.altitude ?  position.coords.altitude :
+        //               'unavailable';
+        //       document.getElementById('altitude-accuracy').innerHTML = position.coords.altitudeAccuracy ?
+        //               position.coords.altitudeAccuracy :
+        //               'unavailable';
+        //       document.getElementById('heading').innerHTML = position.coords.heading ? position.coords.heading :
+        //               'unavailable';
+        //       document.getElementById('speed').innerHTML = position.coords.speed ? position.coords.speed :
+        //               'unavailable';
+ 
+        //       document.getElementById('timestamp').innerHTML = (new Date(position.timestamp)).toString();
+ 
+        //       log.innerHTML = 'Position succesfully retrieved<br />' + log.innerHTML;
+        //     }
+ 
+        //     function error(positionError) {
+        //       log.innerHTML = 'Error: ' + positionError.message + '<br />' + log.innerHTML;
+        //     }
+ 
+        //     document.getElementById('button-get-position').addEventListener('click', function() {
+        //       navigator.geolocation.getCurrentPosition(success, error, positionOptions);
+        //     });
+ 
+        //     document.getElementById('button-watch-position').addEventListener('click', function() {
+        //       watchId = navigator.geolocation.watchPosition(success, error, positionOptions);
+        //     });
+ 
+        //     document.getElementById('button-stop-watching').addEventListener('click', function() {
+        //       if (watchId !== null) {
+        //           navigator.geolocation.clearWatch(watchId);
+        //           log.innerHTML = 'Stopped watching position<br />' + log.innerHTML;
+        //       }
+        //     });
+ 
+        //     document.getElementById('clear-log').addEventListener('click', function() {
+        //       log.innerHTML = '';
+        //     });
+        //  }
+      </script>
+
+
+<!--<span id="g-unsupported" class="hidden">API not supported</span>-->
