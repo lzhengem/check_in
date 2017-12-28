@@ -9,7 +9,18 @@
               return google.maps.geometry.spherical.computeDistanceBetween(
                 new google.maps.LatLng(loc1['lat'], loc1['lng']), new google.maps.LatLng(loc2['lat'],loc2['lng']));
            }
-           
+        function getJson(url) {
+         return JSON.parse($.ajax({
+             type: 'GET',
+             url: url,
+             dataType: 'json',
+             global: false,
+             async:false,
+             success: function(data) {
+                 return data;
+             }
+         }).responseText);
+        }
         
         function initMap() {
             var geocoder = new google.maps.Geocoder;
@@ -23,28 +34,16 @@
                     var latitude = position.coords.latitude;
                     var longitude = position.coords.longitude;
                     var latlng = {lat: latitude, lng: longitude};
-                    var otherlat = 37.721196;
-                    var otherlong = -122.436427;
-                    var otherloc = {lat: otherlat, lng:otherlong};
-                    var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address=500+london+st,+San+Francisco,+CA&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
-                    var myJsonObj;
+                    // var otherlat = 37.721196;
+                    // var otherlong = -122.436427;
+                    // var otherloc = {lat: otherlat, lng:otherlong};
+                    var otheraddress = "500+london+st,+San+Francisco,+CA";
+                    var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ otheraddress + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
+                    var otherAddressResults =  getJson(address1).results[0]
+                    var otheraddresslatlng= otherAddressResults.geometry.location;
                     
-                    function getJson(url) {
-                     return JSON.parse($.ajax({
-                         type: 'GET',
-                         url: url,
-                         dataType: 'json',
-                         global: false,
-                         async:false,
-                         success: function(data) {
-                             return data;
-                         }
-                     }).responseText);
-                    }
-                     
-                     myJsonObj= getJson(address1);
                     
-                    alert(JSON.stringify(myJsonObj, null, 4));
+                    // alert(JSON.stringify(otheraddresslatlng, null, 4));
 
                     
                     geocoder.geocode({'location': latlng}, function(results, status) {
@@ -52,8 +51,8 @@
                         var output = "You are currently located at " + results[0].formatted_address;
                         document.getElementById('location').innerHTML = output;
 
-                        var distance = calcDistance(latlng,otherloc);
-                        var distance_output = "You are " + distance + "m away from ";
+                        var distance = calcDistance(latlng,otheraddresslatlng);
+                        var distance_output = "You are " + distance + "m away from " + otherAddressResults.formatted_address;
                         document.getElementById('distance').innerHTML = distance_output;
                         
                     });
