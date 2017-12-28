@@ -1,9 +1,19 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU&libraries=geometry"></script>
 <script>
          window.navigator = window.navigator || {};
          window.navigator.geolocation = window.navigator.geolocation ||
                                         undefined;
+        // calculate the distance between loc1 and loc2, which are both hashs
+        function calcDistance (loc1, loc2) {
+              return google.maps.geometry.spherical.computeDistanceBetween(
+                new google.maps.LatLng(loc1['lat'], loc1['lng']), new google.maps.LatLng(loc2['lat'],loc2['lng']));
+           }
+           
+        
         function initMap() {
             var geocoder = new google.maps.Geocoder;
+            
             if (navigator.geolocation === undefined) {
             // document.getElementById('g-unsupported').classList.remove('hidden');
                     alert("Your geolocation is undefined");
@@ -13,19 +23,46 @@
                     var latitude = position.coords.latitude;
                     var longitude = position.coords.longitude;
                     var latlng = {lat: latitude, lng: longitude};
+                    var otherlat = 37.721196;
+                    var otherlong = -122.436427;
+                    var otherloc = {lat: otherlat, lng:otherlong};
+                    var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address=500+london+st,+San+Francisco,+CA&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
+                    var myJsonObj;
+                    
+                    function getJson(url) {
+                     return JSON.parse($.ajax({
+                         type: 'GET',
+                         url: url,
+                         dataType: 'json',
+                         global: false,
+                         async:false,
+                         success: function(data) {
+                             return data;
+                         }
+                     }).responseText);
+                    }
+                     
+                     myJsonObj= getJson(address1);
+                    
+                    alert(JSON.stringify(myJsonObj, null, 4));
+
+                    
                     geocoder.geocode({'location': latlng}, function(results, status) {
                         // results[0].formatted_address == address, 2 == cross street, 3 == neighboorhood, 4 = city, 5 == county, 6 = bay area?, 8 = CA, 9 = USA
                         var output = "You are currently located at " + results[0].formatted_address;
                         document.getElementById('location').innerHTML = output;
-                        // alert(results[0].formatted_address);
 
+                        var distance = calcDistance(latlng,otherloc);
+                        var distance_output = "You are " + distance + "m away from ";
+                        document.getElementById('distance').innerHTML = distance_output;
                         
                     });
                 });
-            };
-        };
+            }
+        }
       </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU&callback=initMap"></script>
+
     
 <div id="location"></div>
+<div id="distance"></div>
 <!--<span id="g-unsupported" class="hidden">API not supported</span>-->
