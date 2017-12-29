@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require googleMapsAReverseGeocoder
+//= require googleMapsGeometryAPI
 //= require_tree .
