@@ -35,8 +35,8 @@
                     // var otherlat = 37.721196;
                     // var otherlong = -122.436427;
                     // var otherloc = {lat: otherlat, lng:otherlong};
-                    // var otheraddress = "500+london+st,+San+Francisco,+CA";
-                    var otheraddress = "1+Market+St,+San+Francisco,+CA";
+                    var otheraddress = "500+london+st,+San+Francisco,+CA";
+                    // var otheraddress = "1+Market+St,+San+Francisco,+CA";
                     var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ otheraddress + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
                     var otherAddressResults =  getJson(address1).results[0]
                     var otheraddresslatlng= otherAddressResults.geometry.location;
@@ -48,13 +48,18 @@
                     geocoder.geocode({'location': latlng}, function(results, status) {
                         if (status === 'OK') {
                             // results[0].formatted_address == address, 2 == cross street, 3 == neighboorhood, 4 = city, 5 == county, 6 = bay area?, 8 = CA, 9 = USA
-                            var output = "You are currently located at " + results[0].formatted_address;
-                            document.getElementById('location').innerHTML = output;
+                            var currentAddress = results[0].formatted_address;
+                            var output = "You are currently located at " + currentAddress;
+                            document.getElementById('location_text').innerHTML = output;
+                            document.getElementById('location').value = currentAddress;
                             
                             var distance = calcDistance(latlng,otheraddresslatlng).toFixed(2);
                             
                             var distance_output = "You are " + distance + "m away from " + otherAddressResults.formatted_address;
-                            document.getElementById('distance').innerHTML = distance_output;
+                            document.getElementById('distance_text').innerHTML = distance_output;
+                            document.getElementById('distance').value = distance;
+                            if (distance > 300)
+                                document.getElementById("check_in").disabled = true;
                         }
                         else {
                             window.alert('Geocoder failed due to: ' + status);

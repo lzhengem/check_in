@@ -5,7 +5,15 @@
 </script>
 
     
-<div id="location"></div>
-<div id="distance"></div>
-<div id="testing"></div>
+<div id="location_text"></div>
+<div id="distance_text"></div>
+<!--<div id="testing"></div>-->
+
+<%= form_tag("/search", method: "post") do %>
+        <%= hidden_field_tag :location%>
+        <%= hidden_field_tag :distance%>
+
+        <%= submit_tag "Check in", id: "check_in"  %>
+<% end %>
+
 <!--<span id="g-unsupported" class="hidden">API not supported</span>-->
