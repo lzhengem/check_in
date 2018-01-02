@@ -44,36 +44,35 @@
                     var otheraddresslatlng= otherAddressResults.geometry.location;
                     var output = "You are currently located at " + position.coords.latitude + ", " + position.coords.longitude;
                     var currentAddress = position.coords.latitude + ", " + position.coords.longitude;
+                    // calculate the distance between the current location and the destination
+                    var distance = calcDistance(latlng,otheraddresslatlng).toFixed(2);
                     
                     // alert(JSON.stringify(otheraddresslatlng, null, 4));
-
                     
+                    // reverse geocode user's long and lat into physical address
                     geocoder.geocode({'location': latlng}, function(results, status) {
                         if (status === 'OK') {
                             // results[0].formatted_address == address, 2 == cross street, 3 == neighboorhood, 4 = city, 5 == county, 6 = bay area?, 8 = CA, 9 = USA
                             currentAddress = results[0].formatted_address;
                             output = "You are currently located at " + currentAddress;
-                            
-                            // calculate the distance between the current location and the destination
-                            var distance = calcDistance(latlng,otheraddresslatlng).toFixed(2);
-                            
-                            // list how far away user is
-                            var distance_output = "You are " + distance + "m away from " + otherAddressResults.formatted_address;
-                            document.getElementById('distance_text').innerHTML = distance_output;
-                            document.getElementById('distance').value = distance;
-                            
-                            // if the user is more than 300m away from the destination, disable the check_in_button
-                            if (distance > 300)
-                                disable("check_in_button");
                         }
-                        else {
-                            // if unable to find their location, then alert them
-                            window.alert('Geocoder failed due to: ' + status);
-                            disable("check_in_button");
-                        }
+                        // else {
+                        //     // if unable to find their location, then alert them
+                        //     window.alert('Geocoder failed due to: ' + status);
+                        // }
+                        
                         // if geocoder fails to reverse geocode address, then display long and lat, if it successfully reverse geocoded, then display the physical address
                         document.getElementById('location_text').innerHTML = output;
                         document.getElementById('location').value = currentAddress;
+                        
+                        // list how far away user is
+                        var distance_output = "You are " + distance + "m away from " + otherAddressResults.formatted_address;
+                        document.getElementById('distance_text').innerHTML = distance_output;
+                        document.getElementById('distance').value = distance;
+                        
+                        // if the user is more than 300m away from the destination, disable the check_in_button
+                        if (distance > 300)
+                            disable("check_in_button");
                     });
 
                 });
