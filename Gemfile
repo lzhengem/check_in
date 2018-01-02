@@ -47,3 +47,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  #use pg in production since heroku uses pg
+  gem 'pg'
+
+end
