@@ -36,6 +36,8 @@
                     var latitude = position.coords.latitude;
                     var longitude = position.coords.longitude;
                     var latlng = {lat: latitude, lng: longitude};
+                    document.getElementById('long_lat').innerHTML = JSON.stringify(latlng, null, 4);
+                    // alert(JSON.stringify(latlng, null, 4));
                     // var otherlat = 37.721196;
                     // var otherlong = -122.436427;
                     // var otherloc = {lat: otherlat, lng:otherlong};
@@ -77,11 +79,12 @@
                         document.getElementById('distance_text').innerHTML = distance_output;
                         document.getElementById('distance').value = distance;
                         
+                        
                         // if the user is more than 300m away from the destination, disable the check_in_button
                         if (distance > 300)
                             disable("check_in_button");
                     });
 
-                });
+                }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
             }
         }
