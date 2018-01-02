@@ -5,6 +5,7 @@ class CheckInsController < ApplicationController
   # GET /check_ins.json
   def index
     @check_ins = CheckIn.all
+    @destinations = Destination.all
   end
 
   # GET /check_ins/1
@@ -15,6 +16,7 @@ class CheckInsController < ApplicationController
   # GET /check_ins/new
   def new
     @check_in = CheckIn.new
+    @destination = Destination.find(params[:destination_id])
   end
 
   # GET /check_ins/1/edit
@@ -70,5 +72,9 @@ class CheckInsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def check_in_params
       params.require(:check_in).permit(:location, :longitude, :latitude, :destination_id)
+    end
+    
+    def destination_params
+      params.permit(:destination_id)
     end
 end

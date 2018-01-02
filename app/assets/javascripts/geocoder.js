@@ -22,8 +22,10 @@
         }
             
         // this is called by the google maps reversegecoder once its loaded
-        function initMap() {
+        function initMap(destination) {
             var geocoder = new google.maps.Geocoder;
+            destination = destination.replace(/\s+/g, "+");
+            
             
             // if the use did not allow for geolocation, then alert them that it is undefined
             if (navigator.geolocation === undefined) {
@@ -37,15 +39,19 @@
                     // var otherlat = 37.721196;
                     // var otherlong = -122.436427;
                     // var otherloc = {lat: otherlat, lng:otherlong};
-                    var otheraddress = "500+london+st,+San+Francisco,+CA";
+                    // var otheraddress = "500+london+st,+San+Francisco,+CA";
                     // var otheraddress = "1+Market+St,+San+Francisco,+CA";
-                    var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ otheraddress + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
+                    var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ destination + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
+                    
                     var otherAddressResults =  getJson(address1).results[0]
+                    
                     var otheraddresslatlng= otherAddressResults.geometry.location;
+                    
                     var output = "You are currently located at " + position.coords.latitude + ", " + position.coords.longitude;
                     var currentAddress = position.coords.latitude + ", " + position.coords.longitude;
                     // calculate the distance between the current location and the destination
                     var distance = calcDistance(latlng,otheraddresslatlng).toFixed(2);
+                    
                     
                     // alert(JSON.stringify(otheraddresslatlng, null, 4));
                     
@@ -67,6 +73,7 @@
                         
                         // list how far away user is
                         var distance_output = "You are " + distance + "m away from " + otherAddressResults.formatted_address;
+                        
                         document.getElementById('distance_text').innerHTML = distance_output;
                         document.getElementById('distance').value = distance;
                         
