@@ -84,7 +84,7 @@
                         document.getElementById('distance_text').innerHTML = distance_output;
                     });
 
-                },function error(msg){alert('Please enable your GPS position future.');  
+                },function error(msg){alert('Please enable your GPS position feature.');  
 
               }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
             
