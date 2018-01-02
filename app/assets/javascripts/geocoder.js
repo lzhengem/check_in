@@ -5,8 +5,6 @@
         }
         // calculate the distance between loc1 and loc2, which are both hashs
         function calcDistance (loc1, loc2) {
-            // document.getElementById('testing').innerHTML = JSON.stringify(google.maps, null, 4);
-                // alert(JSON.stringify(google.maps, null, 4));
               return google.maps.geometry.spherical.computeDistanceBetween(
                 new google.maps.LatLng(loc1['lat'], loc1['lng']), new google.maps.LatLng(loc2['lat'],loc2['lng']));
            }
@@ -19,13 +17,17 @@
          }).responseText);
         }
         
+        function disable(id){
+            document.getElementById(id).disabled = true;
+        }
+            
         // this is called by the google maps reversegecoder once its loaded
         function initMap() {
             var geocoder = new google.maps.Geocoder;
             
+            // if the use did not allow for geolocation, then alert them that it is undefined
             if (navigator.geolocation === undefined) {
-            // document.getElementById('g-unsupported').classList.remove('hidden');
-                    alert("Your geolocation is undefined");
+                    alert("Your geolocation is undefined, please turn on geoloation");
             }
             else {
                 navigator.geolocation.getCurrentPosition(function(position) {
@@ -40,7 +42,8 @@
                     var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ otheraddress + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
                     var otherAddressResults =  getJson(address1).results[0]
                     var otheraddresslatlng= otherAddressResults.geometry.location;
-                    
+                    var output = "You are currently located at " + position.coords.latitude + ", " + position.coords.longitude;
+                    var currentAddress = position.coords.latitude + ", " + position.coords.longitude;
                     
                     // alert(JSON.stringify(otheraddresslatlng, null, 4));
 
@@ -48,23 +51,31 @@
                     geocoder.geocode({'location': latlng}, function(results, status) {
                         if (status === 'OK') {
                             // results[0].formatted_address == address, 2 == cross street, 3 == neighboorhood, 4 = city, 5 == county, 6 = bay area?, 8 = CA, 9 = USA
-                            var currentAddress = results[0].formatted_address;
-                            var output = "You are currently located at " + currentAddress;
-                            document.getElementById('location_text').innerHTML = output;
-                            document.getElementById('location').value = currentAddress;
+                            currentAddress = results[0].formatted_address;
+                            output = "You are currently located at " + currentAddress;
                             
+                            // calculate the distance between the current location and the destination
                             var distance = calcDistance(latlng,otheraddresslatlng).toFixed(2);
                             
+                            // list how far away user is
                             var distance_output = "You are " + distance + "m away from " + otherAddressResults.formatted_address;
                             document.getElementById('distance_text').innerHTML = distance_output;
                             document.getElementById('distance').value = distance;
+                            
+                            // if the user is more than 300m away from the destination, disable the check_in_button
                             if (distance > 300)
-                                document.getElementById("check_in").disabled = true;
+                                disable("check_in_button");
                         }
                         else {
+                            // if unable to find their location, then alert them
                             window.alert('Geocoder failed due to: ' + status);
+                            disable("check_in_button");
                         }
+                        // if geocoder fails to reverse geocode address, then display long and lat, if it successfully reverse geocoded, then display the physical address
+                        document.getElementById('location_text').innerHTML = output;
+                        document.getElementById('location').value = currentAddress;
                     });
+
                 });
             }
         }
