@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171231093127) do
+ActiveRecord::Schema.define(version: 20180102070022) do
 
   create_table "check_ins", force: :cascade do |t|
     t.string   "location"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20171231093127) do
   end
 
   add_index "check_ins", ["destination_id"], name: "index_check_ins_on_destination_id"
+
+  create_table "create_check_ins", force: :cascade do |t|
+    t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "destination_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "create_check_ins", ["destination_id"], name: "index_create_check_ins_on_destination_id"
 
   create_table "destinations", force: :cascade do |t|
     t.string   "address"

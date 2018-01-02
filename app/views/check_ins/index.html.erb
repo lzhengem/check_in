@@ -19,7 +19,7 @@
         <td><%= check_in.location %></td>
         <td><%= check_in.longitude %></td>
         <td><%= check_in.latitude %></td>
-        <td><%= check_in.destination %></td>
+        <td><%= check_in.destination.address %></td>
         <td><%= link_to 'Show', check_in %></td>
         <td><%= link_to 'Edit', edit_check_in_path(check_in) %></td>
         <td><%= link_to 'Destroy', check_in, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -3,4 +3,5 @@ class Destination < ActiveRecord::Base
     # validates :longitude, uniqueness: { scope: :latitude }
     geocoded_by :address
     after_validation :geocode
+    has_many :check_ins, dependent: :destroy
 end
