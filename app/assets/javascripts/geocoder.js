@@ -24,26 +24,23 @@
         // this is called by the google maps reversegecoder once its loaded
         function initMap(destination) {
             var geocoder = new google.maps.Geocoder;
-            destination = destination.replace(/\s+/g, "+");
+            destination_no_space = destination.replace(/\s+/g, "+");
             
             
             // if the use did not allow for geolocation, then alert them that it is undefined
-            if (navigator.geolocation === undefined) {
-                    alert("Your geolocation is undefined, please turn on geoloation");
-            }
-            else {
+            if (navigator.geolocation){ 
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var latitude = position.coords.latitude;
                     var longitude = position.coords.longitude;
                     var latlng = {lat: latitude, lng: longitude};
-                    document.getElementById('long_lat').innerHTML = JSON.stringify(latlng, null, 4);
+                    
                     // alert(JSON.stringify(latlng, null, 4));
                     // var otherlat = 37.721196;
                     // var otherlong = -122.436427;
                     // var otherloc = {lat: otherlat, lng:otherlong};
                     // var otheraddress = "500+london+st,+San+Francisco,+CA";
                     // var otheraddress = "1+Market+St,+San+Francisco,+CA";
-                    var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ destination + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
+                    var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ destination_no_space + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
                     
                     var otherAddressResults =  getJson(address1).results[0]
                     
@@ -53,6 +50,7 @@
                     var currentAddress = position.coords.latitude + ", " + position.coords.longitude;
                     // calculate the distance between the current location and the destination
                     var distance = calcDistance(latlng,otheraddresslatlng).toFixed(2);
+                    var distance_output;
                     
                     
                     // alert(JSON.stringify(otheraddresslatlng, null, 4));
@@ -68,23 +66,30 @@
                         //     // if unable to find their location, then alert them
                         //     window.alert('Geocoder failed due to: ' + status);
                         // }
+                        // if the user is more than 300m away from the destination, disable the check_in_button
+                        if(distance <= 300){
+                            // list how far away user is
+                            distance_output = "You are within 300m of " + destination;
+                        }
+                        else{
+                            // if user is more than 300m away from the destination, then disable to check_in_button
+                            disable("check_in_button");
+                            distance_output = "You are "+ distance + "m away from " + destination + ". You need to be within 300m.";
+                        }
                         
                         // if geocoder fails to reverse geocode address, then display long and lat, if it successfully reverse geocoded, then display the physical address
                         document.getElementById('location_text').innerHTML = output;
                         document.getElementById('location').value = currentAddress;
-                        
-                        // list how far away user is
-                        var distance_output = "You are " + distance + "m away from " + otherAddressResults.formatted_address;
-                        
-                        document.getElementById('distance_text').innerHTML = distance_output;
                         document.getElementById('distance').value = distance;
-                        
-                        
-                        // if the user is more than 300m away from the destination, disable the check_in_button
-                        if (distance > 300)
-                            disable("check_in_button");
+                        document.getElementById('distance_text').innerHTML = distance_output;
                     });
 
-                }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
+                },function error(msg){alert('Please enable your GPS position future.');  
+
+              }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
+            
+            }else {
+                alert("Geolocation API is not supported in your browser.");
             }
+            
         }
