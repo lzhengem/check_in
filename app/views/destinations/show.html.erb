@@ -14,3 +14,21 @@
 </p>
 
 <%= link_to 'Back', destinations_path %>
+
+
+<div class="container">
+  <div class="row font-weight-bold">
+    <div class="col-md-6">Past check in locations:</div>
+    <div class="col-md-6">Check in time:</div>
+  </div>
+  <div class="row">
+    <% @destination.check_ins.each do |check_in| %>
+      <div class="col-md-6">
+        <%= check_in.location %>
+      </div>
+      <div class="col-md-6">
+        <%= check_in.created_at %>
+      </div>
+    <% end %>
+  </div>
+</div>
