@@ -37,7 +37,7 @@ class CheckInsController < ApplicationController
       else
         flash[:danger] = 'Did not successfully check in.'
         # format.html { render :new }
-        format.html { redirect_to new_check_in_path(:destination_id => check_in_params[:destination_id] )}
+        format.html { redirect_to new_check_in_url(:destination_id => check_in_params[:destination_id] )}
         format.json { render json: @check_in.errors, status: :unprocessable_entity }
       end
     end
