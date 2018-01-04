@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>Check-in app</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!--<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">-->
+  <!--<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">-->
 </head>
 <body>
+  <div class="nav">
+    <div class="container">
+      <ul class="pull-right">
+        <li><%= link_to "Check In", check_ins_path %></li>
+        <li><%= link_to "Destinations", destinations_path %></li>
+      </ul>
+      <ul class="pull-left">
+        <li><%= link_to "Check In", check_ins_path %></li>
+        <li><%= link_to "Destinations", destinations_path %></li>
+      </ul>
+    </div>
+  </div>
 
 <%= yield %>
 
