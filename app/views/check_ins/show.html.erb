@@ -18,5 +18,9 @@
   <%= @check_in.destination.address %>
 </p>
 
-<%= link_to 'Edit', edit_check_in_path(@check_in) %> |
+<p>
+  <strong>Checked in at:</strong>
+  <%= @check_in.created_at %>
+</p>
+
 <%= link_to 'Back', check_ins_path %>

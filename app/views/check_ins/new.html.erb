@@ -10,13 +10,18 @@
 <div id="long_lat"></div>
 
 
-<%= form_tag(check_ins_path, method: "post") do %>
-        <%= hidden_field_tag :location%>
-        <%= hidden_field_tag :distance%>
+<!--<%= form_tag(check_ins_path, method: "post") do %>-->
+<!--        <%= hidden_field_tag :location%>-->
+<!--        <%= hidden_field_tag :distance%>-->
 
-        <%= submit_tag "Check in", id: "check_in_button",class: "btn btn-primary"  %>
+<!--        <%= submit_tag "Check in", id: "check_in_button",class: "btn-primary"  %>-->
+<!--<% end %>-->
+
+<%= form_for @check_in do |f| %>
+        <%= f.hidden_field :location %>
+        <%= f.hidden_field :longitude %>
+        <%= f.hidden_field :latitude %>
+        <%= f.hidden_field :destination_id, value: @destination.id  %>
+<%= f.submit "Check in", class: "btn btn-primary", id: "check_in_button" %>
 <% end %>
-
-
-
 <%= link_to 'Back', check_ins_path %>

@@ -16,7 +16,7 @@ class CheckInsController < ApplicationController
   # GET /check_ins/new
   def new
     @check_in = CheckIn.new
-    @destination = Destination.find(params[:destination_id])
+    @destination = Destination.find(destination_params[:destination_id])
   end
 
   # GET /check_ins/1/edit
@@ -32,10 +32,12 @@ class CheckInsController < ApplicationController
       if @check_in.save
         flash[:success] = 'Check in was successfully created.'
         format.html { redirect_to @check_in}
-        format.json { render :show, status: :created, location: @check_in }
+        # format.html { redirect_to check_ins_path}
+        # format.json { render :show, status: :created, location: @check_in }
       else
         flash[:danger] = 'Did not successfully check in.'
-        format.html { render :new }
+        # format.html { render :new }
+        format.html { redirect_to new_check_in_path(:destination_id => check_in_params[:destination_id] )}
         format.json { render json: @check_in.errors, status: :unprocessable_entity }
       end
     end

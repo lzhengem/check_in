@@ -53,14 +53,18 @@
                     var distance_output;
                     
                     
+                    
                     // alert(JSON.stringify(otheraddresslatlng, null, 4));
                     
                     // reverse geocode user's long and lat into physical address
                     geocoder.geocode({'location': latlng}, function(results, status) {
                         if (status === 'OK') {
+                            
                             // results[0].formatted_address == address, 2 == cross street, 3 == neighboorhood, 4 = city, 5 == county, 6 = bay area?, 8 = CA, 9 = USA
                             currentAddress = results[0].formatted_address;
+                            
                             output = "You are currently located at " + currentAddress;
+                            
                         }
                         // else {
                         //     // if unable to find their location, then alert them
@@ -68,6 +72,7 @@
                         // }
                         // if the user is more than 300m away from the destination, disable the check_in_button
                         if(distance <= 300){
+                            
                             // list how far away user is
                             distance_output = "You are within 300m of " + destination;
                         }
@@ -79,9 +84,12 @@
                         
                         // if geocoder fails to reverse geocode address, then display long and lat, if it successfully reverse geocoded, then display the physical address
                         document.getElementById('location_text').innerHTML = output;
-                        document.getElementById('location').value = currentAddress;
-                        document.getElementById('distance').value = distance;
+                        // document.getElementById('distance').value = distance;
                         document.getElementById('distance_text').innerHTML = distance_output;
+                        document.getElementById('check_in_location').value = currentAddress;
+                        document.getElementById('check_in_longitude').value = longitude;
+                        document.getElementById('check_in_latitude').value = latitude;
+                        // document.getElementById('check_in_destination_id').value = destination;
                     });
 
                 },function error(msg){alert('Please enable your GPS position feature.');  
