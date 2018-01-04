@@ -101,3 +101,41 @@
             }
             
         }
+        
+        // display the map to show user where they are and the destination as well
+        function showMap(destination){
+            var geocoder = new google.maps.Geocoder;
+            var destination_no_space = destination.replace(/\s+/g, "+");
+            var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ destination_no_space + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
+            var otherAddressResults =  getJson(address1).results[0]
+            var otheraddresslatlng= otherAddressResults.geometry.location;
+            
+            if (navigator.geolocation){ 
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var latlng = {lat: latitude, lng: longitude};
+                    var bounds = new google.maps.LatLngBounds();
+                    bounds.extend(latlng);
+                    bounds.extend(otheraddresslatlng);
+
+                        
+            //  var currentLocation = {lat: -25.363, lng: 131.044};
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                    //   zoom: 18,
+                      center: latlng
+                    });
+                    var marker = new google.maps.Marker({
+                      position: latlng,
+                      map: map,
+                      title: "Your location"
+                    });
+                    var destinationMarker = new google.maps.Marker({
+                      position: otheraddresslatlng,
+                      map: map,
+                      title: destination
+                    });
+                    map.fitBounds(bounds);
+                });
+            }
+        }
