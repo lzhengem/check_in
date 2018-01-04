@@ -136,6 +136,8 @@
                       title: destination
                     });
                     map.fitBounds(bounds);
-                });
+                },function error(msg){alert('Please enable your GPS position feature.');  
+
+              }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
             }
         }
