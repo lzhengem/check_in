@@ -13,23 +13,23 @@
  *= require_tree .
  *= require_self
  */
- 
- .nav a {
-     color:#5a5a5a;
-     font-size: 11px;
-     font-weight: bold;
-     padding: 14px 10px;
-     text-transform: uppercase;
- }
- 
- .nav li{
-     display: inline;
- }
- 
- .pull-right {
-    float: right!important;
-}
+@import "bootstrap-sprockets" 
+@import "bootstrap"
 
- .pull-left {
-    float: left!important;
-}
+.navbar
+ a 
+  font-size: 11px
+  font-weight: bold
+  padding: 14px 10px
+  text-transform: uppercase
+  text-decoration: none
+ a:hover
+   color: white
+ li
+  display: inline
+.jumbotron
+ background-color: purple
+ color: white
+
+.font-weight-bold
+ font-weight: bold

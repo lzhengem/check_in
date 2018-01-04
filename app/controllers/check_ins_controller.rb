@@ -30,9 +30,11 @@ class CheckInsController < ApplicationController
 
     respond_to do |format|
       if @check_in.save
-        format.html { redirect_to @check_in, notice: 'Check in was successfully created.' }
+        flash[:success] = 'Check in was successfully created.'
+        format.html { redirect_to @check_in}
         format.json { render :show, status: :created, location: @check_in }
       else
+        flash[:danger] = 'Did not successfully check in.'
         format.html { render :new }
         format.json { render json: @check_in.errors, status: :unprocessable_entity }
       end
@@ -44,9 +46,11 @@ class CheckInsController < ApplicationController
   def update
     respond_to do |format|
       if @check_in.update(check_in_params)
-        format.html { redirect_to @check_in, notice: 'Check in was successfully updated.' }
+        flash[:success] = 'Check in was successfully updated.' 
+        format.html { redirect_to @check_in}
         format.json { render :show, status: :ok, location: @check_in }
       else
+        flash[:danger] = "Did not successfully update."
         format.html { render :edit }
         format.json { render json: @check_in.errors, status: :unprocessable_entity }
       end
@@ -58,7 +62,8 @@ class CheckInsController < ApplicationController
   def destroy
     @check_in.destroy
     respond_to do |format|
-      format.html { redirect_to check_ins_url, notice: 'Check in was successfully destroyed.' }
+      flash[:success] = 'Check in was successfully destroyed.' 
+      format.html { redirect_to check_ins_url}
       format.json { head :no_content }
     end
   end
