@@ -139,5 +139,7 @@
                 },function error(msg){alert('Please enable your GPS position feature.');  
 
               }, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});
-            }
+            }else {
+                alert("Geolocation API is not supported in your browser.");
+            } 
         }
