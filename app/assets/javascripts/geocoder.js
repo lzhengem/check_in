@@ -143,3 +143,16 @@
                 alert("Geolocation API is not supported in your browser.");
             } 
         }
+        
+       function setupAutocomplete() {
+        // var map = new google.maps.Map(document.getElementById('map'), {
+        //   center: {lat: -33.8688, lng: 151.2195},
+        //   zoom: 13
+        // });
+        
+        // var card = document.getElementById('pac-card');
+        var input = document.getElementById('address');
+        
+        // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+        var autocomplete = new google.maps.places.Autocomplete(input);
+      }
