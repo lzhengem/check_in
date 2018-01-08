@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
   <div class="row font-weight-bold">
-    <div class="col-md-3">
+    <div class="col-md-4">
       Address
     </div>
     <div class="col-md-1">
@@ -15,19 +15,18 @@
     <div class="col-md-1">
       Longitude
     </div>
-    <div class="col-md-7"></div>
+    <div class="col-md-6"></div>
   </div>
   <% @destinations.each do |destination| %>
-  <div class="row">
+  <div class="row bottom-border">
       
-          <div class="col-md-3"><%= destination.address %></div>
+          <div class="col-md-4"><%= link_to destination.address, destination %></div>
           <div class="col-md-1"><%= destination.latitude %></div>
           <div class="col-md-1"><%= destination.longitude %></div>
-          <div class="col-md-7">
+          <div class="col-md-6">
             
               <div class="col-xs-2"><%= link_to 'Check in', new_check_in_path(:destination_id => destination) %></div>
-              <div class="col-xs-1"><%= link_to 'Show', destination %></div>
-              <div class="col-xs-1"><%= link_to 'Destroy', destination, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+              <div class="col-xs-1"><%= link_to 'Delete', destination, method: :delete, data: { confirm: 'Are you sure?' } %></div>
             
           </div>
         
