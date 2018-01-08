@@ -1,3 +1,19 @@
+<script>
+       function setupAutocomplete() {
+        // var map = new google.maps.Map(document.getElementById('map'), {
+        //   center: {lat: -33.8688, lng: 151.2195},
+        //   zoom: 13
+        // });
+        
+        // var card = document.getElementById('pac-card');
+        var input = document.getElementById('address');
+        
+        // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+        var autocomplete = new google.maps.places.Autocomplete(input);
+      }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU&libraries=places&callback=setupAutocomplete" async defer></script>
+
 <div class="container col-xs-4 col-xs-offset-4">
 <h1>New Destination</h1>
 
