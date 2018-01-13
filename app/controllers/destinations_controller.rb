@@ -15,6 +15,7 @@ class DestinationsController < ApplicationController
   # GET /destinations/new
   def new
     @destination = Destination.new
+    @is_new_destination = true
   end
 
   # GET /destinations/1/edit
