@@ -1,29 +1,8 @@
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU&libraries=geometry" %>
-<script>
-        initGeo();
-        initMap("<%= @destination.address %>");
-        showMap("<%= @destination.address %>");
-        // showMap();
 
-</script>
-    <style>
-      #map {
-        width: 100%;
-        height: 400px;
-        background-color: grey;
-      }</style>
-<h1>Checking in at <%= @destination.address %></h1>    
+<h1>Checking in at <span id='address'><%= @destination.address %></span></h1>    
 <div id="location_text"></div>
 <div id="distance_text"></div>
 <div id="long_lat"></div>
-
-
-<!--<%= form_tag(check_ins_path, method: "post") do %>-->
-<!--        <%= hidden_field_tag :location%>-->
-<!--        <%= hidden_field_tag :distance%>-->
-
-<!--        <%= submit_tag "Check in", id: "check_in_button",class: "btn-primary"  %>-->
-<!--<% end %>-->
 
 <%= form_for @check_in do |f| %>
         <%= f.hidden_field :location %>

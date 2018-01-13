@@ -22,7 +22,8 @@
         }
             
         // this is called by the google maps reversegecoder once its loaded
-        function initMap(destination) {
+        function initMap() {
+            var destination = document.getElementById('address').innerText;
             var geocoder = new google.maps.Geocoder;
             destination_no_space = destination.replace(/\s+/g, "+");
             
@@ -103,7 +104,8 @@
         }
         
         // display the map to show user where they are and the destination as well
-        function showMap(destination){
+        function showMap(){
+            var destination = document.getElementById('address').innerText;
             var geocoder = new google.maps.Geocoder;
             var destination_no_space = destination.replace(/\s+/g, "+");
             var address1 = "https://maps.googleapis.com/maps/api/geocode/json?address="+ destination_no_space + "&key=AIzaSyCeUFPSExQp5oAW7inlirQEjZR5oI4ubSU";
@@ -155,4 +157,10 @@
         
         // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
         var autocomplete = new google.maps.places.Autocomplete(input);
+      }
+    //   putting these 3 functions together for new_check_in creation so google maps api only has one callback
+      function initGeo_initMap_showMap(){
+        initGeo();
+        initMap();
+        showMap();
       }
