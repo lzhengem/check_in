@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+# gem 'rails', '4.2.5'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -26,6 +26,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'geocoder' #for converting long and lat into actual addresses
+#update gem vulnerabilities listed by github
+gem 'actionview', '~> 4.2.7.1'
+gem 'nokogiri', '~> 1.8.1'
+gem 'rails', '~> 4.2.7.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -41,6 +45,8 @@ group :development, :test do
   gem 'byebug'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  #update gem vulnerabilities listed by github
+  gem 'activerecord', '~> 4.2.7.1'
 end
 
 group :development do
