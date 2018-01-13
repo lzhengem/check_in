@@ -17,7 +17,6 @@ class CheckInsController < ApplicationController
   def new
     @check_in = CheckIn.new
     @destination = Destination.find(destination_params[:destination_id])
-    @is_new_check_in = true
   end
 
   # GET /check_ins/1/edit
