@@ -59,6 +59,6 @@ end
 
 group :production do
   #use pg in production since heroku uses pg
-  gem 'pg'
+  gem 'pg', '~> 1.0.0'
 
 end
