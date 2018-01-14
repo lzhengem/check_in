@@ -32,8 +32,10 @@ class DestinationsController < ApplicationController
         format.html { redirect_to @destination}
         format.json { render :show, status: :created, location: @destination }
       else
+        
         flash[:danger] = "Destination did not create successfully."
-        format.html { render :new }
+        # format.html { render :new }
+        format.html { redirect_to :back }
         format.json { render json: @destination.errors, status: :unprocessable_entity }
       end
     end
