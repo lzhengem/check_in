@@ -27,13 +27,13 @@ class DestinationsController < ApplicationController
     @destination = Destination.new(destination_params)
 
     respond_to do |format|
-      if @destination.save
+      if @destination.valid? and @destination.save
         flash[:success] = 'Destination was successfully created.'
         format.html { redirect_to @destination}
         format.json { render :show, status: :created, location: @destination }
       else
         
-        flash[:danger] = "Destination did not create successfully."
+        flash[:danger] = "Destination did not create successfully." + @destination.errors.full_messages.join(", ")
         # format.html { render :new }
         format.html { redirect_to :back }
         format.json { render json: @destination.errors, status: :unprocessable_entity }
