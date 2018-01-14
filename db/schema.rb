@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114072129) do
+ActiveRecord::Schema.define(version: 20180114235733) do
 
   create_table "check_ins", force: :cascade do |t|
     t.string   "location"
@@ -44,5 +44,13 @@ ActiveRecord::Schema.define(version: 20180114072129) do
   end
 
   add_index "destinations", ["longitude", "latitude"], name: "index_destinations_on_longitude_and_latitude", unique: true
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
