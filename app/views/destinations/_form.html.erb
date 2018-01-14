@@ -15,15 +15,16 @@
     <%= f.label :address %><br>
     <%= f.text_field :address, id: "address" %>
   </div>
-  <!--<div class="field">-->
-  <!--  <%= f.label :latitude %><br>-->
-  <!--  <%= f.text_field :latitude %>-->
-  <!--</div>-->
-  <!--<div class="field">-->
-  <!--  <%= f.label :longitude %><br>-->
-  <!--  <%= f.text_field :longitude %>-->
-  <!--</div>-->
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add new Destination", id: "only_click" %>
   </div>
+  
+  <div id="map"></div>
+  <div id="infowindow-content">
+    <img src="" width="16" height="16" id="place-icon">
+    <span id="place-name"  class="title"></span><br>
+    <span id="place-address"></span>
+  </div>
+  
+
 <% end %>
