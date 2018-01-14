@@ -71,14 +71,14 @@
                         //     // if unable to find their location, then alert them
                         //     window.alert('Geocoder failed due to: ' + status);
                         // }
-                        // if the user is more than 300m away from the destination, disable the check_in_button
-                        if(distance <= 300){
+                        // if the user is more than 30m away from the destination, disable the check_in_button
+                        if(distance <= 30){
                             
                             // list how far away user is
-                            distance_output = "You are within 300m of " + destination;
+                            distance_output = "You are within 30m of " + destination;
                         }
                         else{
-                            // if user is more than 300m away from the destination, then disable to check_in_button
+                            // if user is more than 30m away from the destination, then disable to check_in_button
                             disable("check_in_button");
                             distance_output = "You are "+ distance + "m away from " + destination + ". You need to be within 300m.";
                         }
