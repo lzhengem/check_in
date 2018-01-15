@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
     # this enforces validations on the virtual password and password_confirmation
     has_secure_password
     validates :password, presence: true, length: {minimum: 6}
+    
+    # retrusn the digest of the string bia BCRYPT. used to check password digest
+    def User.digest(string)
+        # if in testing, use lowest cost, if in production, user normal cost
+        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+        BCrypt::Password.create(string, cost: cost)
+        
+    end
 end
