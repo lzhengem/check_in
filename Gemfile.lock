@@ -39,6 +39,7 @@ GEM
     arel (6.0.4)
     autoprefixer-rails (7.2.5)
       execjs
+    bcrypt (3.1.11)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.2)
@@ -162,6 +163,7 @@ DEPENDENCIES
   actionview (~> 4.2.7.1)
   activerecord (~> 4.2.7.1)
   autoprefixer-rails
+  bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0)
   byebug
   coffee-rails (~> 4.1.0)
@@ -180,4 +182,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.15.4
+   1.16.1
