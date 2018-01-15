@@ -1,14 +1,7 @@
-
 <h2>Checking in at <span id='address'><%= @destination.address %></span></h2>    
-<div id="location_text"></div>
-<div id="distance_text"></div>
-<div id="long_lat"></div>
-<%= form_for @check_in do |f| %>
-        <%= f.hidden_field :location %>
-        <%= f.hidden_field :longitude %>
-        <%= f.hidden_field :latitude %>
-        <%= f.hidden_field :destination_id, value: @destination.id  %>
-<%= f.submit "Check in", class: "btn btn-primary", id: "check_in_button" %>
-<% end %>
-<%= link_to 'Back', check_ins_path %>
+<div id="location_text" class="text-center"></div>
+<div id="distance_text" class="text-center"></div>
+<div id="long_lat" class="text-center"></div>
+<%= render 'form' %>
 <div id="map"></div>
+
