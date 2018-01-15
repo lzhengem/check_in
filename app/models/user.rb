@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
     has_secure_password
     validates :password, presence: true, length: {minimum: 6}
     
-    # retrusn the digest of the string bia BCRYPT. used to check password digest
-    def User.digest(string)
+    attr_accessor :remember_token
+    
+    # returns the digest of the string bia BCRYPT. used to check password digest
+    def self.digest(string)
         # if in testing, use lowest cost, if in production, user normal cost
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
@@ -17,7 +19,13 @@ class User < ActiveRecord::Base
     end
     
     # for creating remember_token
-    def User.new_token
+    def self.new_token
         SecureRandom.urlsafe_base64
+    end
+    
+    # every time user logs in and wants to remember, then create new remember token for each new session
+    def remember
+        self.remember_token = User.new_token
+        update_attribute(:remember_digest, User.digest(remember_token))
     end
 end
