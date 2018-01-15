@@ -7,4 +7,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  # since tests can't user helper methods, need a parallel to sessionHelper method logged_in?
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
 end
