@@ -1,7 +1,14 @@
 <h2>Checking in at <span id='address'><%= @destination.address %></span></h2>    
+
 <div id="location_text" class="text-center"></div>
 <div id="distance_text" class="text-center"></div>
 <div id="long_lat" class="text-center"></div>
 <%= render 'form' %>
-<div id="map"></div>
+<br></br>
+<div class="container col-xs-4 col-xs-offset-4">
+    
+    <div id="map"></div>
+    <%= link_to 'Back', check_ins_path, class: "text-center" %>
+</div>
+
 
