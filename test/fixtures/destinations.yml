@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  address: MyString
-  latitude: 1.5
-  longitude: 1.5
+ccsf:
+  address: 50 phelan ave
+  latitude: 37.724695
+  longitude: -122.4529324
+
 
 two:
   address: MyString

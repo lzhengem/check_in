@@ -4,10 +4,10 @@ one:
   location: MyString
   longitude: 1.5
   latitude: 1.5
-  destination_id: 
+  destination_id: <%= Destination.pluck(:id) %> 
 
 two:
   location: MyString
   longitude: 1.5
   latitude: 1.5
-  destination_id: 
+  destination_id: <%= Destination.pluck(:id) %> 

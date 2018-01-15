@@ -32,7 +32,6 @@ class DestinationsController < ApplicationController
         format.html { redirect_to @destination}
         format.json { render :show, status: :created, location: @destination }
       else
-        
         flash[:danger] = "Destination did not create successfully." + @destination.errors.full_messages.join(", ")
         # format.html { render :new }
         format.html { redirect_to :back }
@@ -76,6 +75,7 @@ class DestinationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def destination_params
-      params.require(:destination).permit(:address, :latitude, :longitude)
+      # params.require(:destination).permit(:address, :latitude, :longitude)
+      params.require(:destination).permit(:address)
     end
 end
