@@ -1,20 +1,7 @@
-<script>
-        // scripts in app/assests/javascripts/geocoder.js
-        initGeo();
-        initMap();
+<h1 class="text-center">Hello!</h1>
 
-</script>
-
-    
-<div id="location_text"></div>
-<div id="distance_text"></div>
-<!--<div id="testing"></div>-->
-
-<%= form_tag("/search", method: "post") do %>
-        <%= hidden_field_tag :location%>
-        <%= hidden_field_tag :distance%>
-
-        <%= submit_tag "Check in", id: "check_in_button"  %>
-<% end %>
-
-<!--<span id="g-unsupported" class="hidden">API not supported</span>-->
+<div class="text-center">
+        Welcome to the check in app. This app allows you to set up a destination which you can check-in into
+        after you have reached the site. Please <%= link_to "Sign up", signup_path%> 
+        if you are a new user!
+</div>
