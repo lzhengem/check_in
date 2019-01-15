@@ -24,5 +24,5 @@ Check in is an app that allows for users to check in once they've reached their 
 * After you have created a destination, click on the Check In link and choose to location you would like to check in at.
 ![Check in locations](check_in_select_desination.png "Check in locations")
 
-* if you are within 50 meters of the destination, the check in button turns dark blue you may check in. If you are not within 50 meters, you will not be allowed to check in.
+* if you are within 50 meters of the destination, the check in button turns dark blue and you may check in. If you are not within 50 meters, you will not be allowed to check in.
 ![Check in](check_in.png "Check In")
